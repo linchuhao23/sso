@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.lin.sso.auth.server.filter.SSOFilter;
-import com.lin.sso.auth.server.listener.SessionIdHolder;
+import com.lin.sso.auth.server.listener.support.HttpSessionHolder;
 
 public class VerifyServlet extends HttpServlet {
 
@@ -23,7 +23,7 @@ public class VerifyServlet extends HttpServlet {
 			String[] split = token.split(",");
 			if (split.length == 2) {
 				String sessionId = split[0];
-				HttpSession httpSession = SessionIdHolder.get(sessionId);
+				HttpSession httpSession = HttpSessionHolder.get(sessionId);
 				if (httpSession != null) {
 					Object _token = httpSession.getAttribute(SSOFilter.TOKEN);
 					if (_token != null && token.equals(_token)) {

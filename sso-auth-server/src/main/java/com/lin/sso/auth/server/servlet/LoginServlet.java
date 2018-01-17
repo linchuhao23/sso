@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
 		if ("admin".equals(username) && "admin".equals(password)) {
 			String token = UUID.randomUUID().toString().replaceAll("-", "");
 			HttpSession session = req.getSession();
+			session.setMaxInactiveInterval(-1);//认证中心session不过期
 			token = session.getId() + "," + token;
 			session.setAttribute(SSOFilter.TOKEN, token);
 			String callbackUrl = req.getParameter(SSOFilter.CALLBACK_URL);

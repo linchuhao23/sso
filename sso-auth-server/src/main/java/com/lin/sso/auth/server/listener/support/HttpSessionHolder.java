@@ -1,4 +1,4 @@
-package com.lin.sso.auth.server.listener;
+package com.lin.sso.auth.server.listener.support;
 
 import java.util.Map;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
-public class SessionIdHolder {
+public class HttpSessionHolder {
 	
 	private static final Map<String, HttpSession> holder = new ConcurrentHashMap<String, HttpSession>();
 	

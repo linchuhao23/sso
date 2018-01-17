@@ -2,6 +2,7 @@ package com.lin.sso.auth.client.filter;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -28,6 +29,15 @@ public class SSOFilter implements Filter {
 	private String SSO_SERVER_URL;
 	
 	private String SSO_SERVER_VERIFY_URL;
+	
+	//服务系统的名称，保证所有系统唯一
+	private String sys_name = UUID.randomUUID().toString().replaceAll("-", "");
+	
+	//退出路径
+	private String logout_url = "/logout";
+	
+	//认证系统通知用户退出
+	private String sys_logout_url = "/sys_logout";
 	
 	public void destroy() {
 		
@@ -72,6 +82,12 @@ public class SSOFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 		SSO_SERVER_URL = Objects.requireNonNull(filterConfig.getInitParameter(SSO_SERVER_URL_PARAMETER_NAME), "SSO_SERVER_URL can not be null");
 		SSO_SERVER_VERIFY_URL = Objects.requireNonNull(filterConfig.getInitParameter(SSO_SERVER_VERIFY_URL_PARAMETER_NAME), "SSO_SERVER_VERIFY_URL can not be null");
+	
+		String initSysName = filterConfig.getInitParameter("sys_name");
+		if (initSysName != null) {
+			sys_name = initSysName;
+		}
+		
 	}
 	
 	/**
@@ -82,7 +98,6 @@ public class SSOFilter implements Filter {
 	 */
 	private boolean verify(String verifyUrl, String token) {
 		String text = HttpClientUtils.getText(verifyUrl + "?" + TOKEN + "=" + token, null , "utf-8");
-		System.out.println(text);
 		if ("true".equalsIgnoreCase(text)) {
 			return true;
 		}
