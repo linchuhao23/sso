@@ -10,4 +10,5 @@
   	<module>sso-auth-web</module>
   	<module>sso-auth-web2</module>
   </modules>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </project>
