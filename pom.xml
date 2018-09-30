@@ -4,11 +4,11 @@
   <artifactId>sso</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <modules>
   	<module>sso-auth-client</module>
   	<module>sso-auth-server</module>
   	<module>sso-auth-web</module>
   	<module>sso-auth-web2</module>
   </modules>
-  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </project>
